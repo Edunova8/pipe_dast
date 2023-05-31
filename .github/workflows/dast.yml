@@ -18,7 +18,7 @@ jobs:
 
     # Scan with Checkmarx DAST
     - name: run cxdast on my web app
-      uses: checkmarx/dast-github-action@v1.0.4
+      uses: checkmarx/dast-github-action@v1.0.2
       env: 
         CX_APIKEY: ${{ secrets.CXONE_APIKEY }}
       with:
@@ -29,9 +29,9 @@ jobs:
         # fail_on: 'HIGH'
         verbose: true
         output: ./output
-    - name: Reclaim output directory
-      if: always()  
-      run: sudo chown -R 1001:1001 ${{ github.workspace }}/output
+  #  - name: Reclaim output directory
+    #  if: always()  
+    #  run: sudo chown -R 1001:1001 ${{ github.workspace }}/output
     - uses: actions/upload-artifact@v3
       if: always()
       name: Attach DAST report as an artifact to workflow  
