@@ -36,5 +36,5 @@ jobs:
       if: always()
       name: Attach DAST report as an artifact to workflow  
       with:
-        name: report
+        name: report.pdf
         path: ./output    
