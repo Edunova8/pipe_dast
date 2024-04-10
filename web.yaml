@@ -58,7 +58,7 @@ jobs:
       url: ""
       maxDuration: 60
       maxCrawlDepth: 10
-      numberOfBrowsers: 1
+      
       runOnlyIfModern: false
     name: "spiderAjax"
     type: "spiderAjax"
