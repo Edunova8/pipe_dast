@@ -1,0 +1,90 @@
+env:
+    contexts:
+        - authentication:
+            method: form
+            parameters:
+                loginPageUrl: https://brokencrystals.com/userlogin?logobgcolor=transparent
+                loginRequestBody: username={%username%}&password={%password%}
+                loginRequestUrl: https://brokencrystals.com/userlogin?logobgcolor=transparent
+            verification:
+                loggedInRegex: Sign In
+                loggedOutRegex: Sign Out
+                method: response
+                pollFrequency: 60
+                pollPostData: ""
+                pollUnits: requests
+                pollUrl: ""
+          excludePaths: []
+          includePaths:
+            - https://brokencrystals.com.*
+          name: Default Context
+          sessionManagement:
+            method: cookie
+            parameters: {}
+          technology:
+            exclude: []
+          urls:
+            - https://brokencrystals.com
+          users:
+            - credentials:
+                password: admin
+                username: admin
+              name: admin
+    parameters:
+        failOnError: true
+        failOnWarning: false
+        progressToStdout: true
+    vars: {}
+jobs:
+    - name: passiveScan-config
+      parameters:
+        disableAllRules: false
+        enableTags: false
+        scanOnlyInScope: true
+      rules: []
+      type: passiveScan-config
+    - name: spider
+      parameters:
+        context: Default Context
+        maxChildren: 0
+        maxDepth: 0
+        maxDuration: 0
+        url: https://brokencrystals.com
+        user: admin
+      type: spider
+    - name: spiderAjax
+      parameters:
+        context: Default Context
+        inScopeOnly: true
+        maxCrawlDepth: 10
+        maxDuration: 60
+       
+        runOnlyIfModern: false
+        url: https://brokencrystals.com
+        user: admin
+      type: spiderAjax
+    - name: passiveScan-wait
+      parameters:
+        maxDuration: 0
+      type: passiveScan-wait
+    - name: activeScan
+      parameters:
+        context: Default Context
+        maxRuleDurationInMins: 0
+        maxScanDurationInMins: 0
+        policy: ""
+        user: admin
+      policyDefinition:
+        defaultStrength: medium
+        defaultThreshold: medium
+        rules: []
+      type: activeScan
+    - name: report
+      parameters:
+        displayReport: false
+        reportDescription: ""
+        reportDir: ./dast-output-2231075323/dast-output-2204173195
+        reportFile: ZAP-Report
+        reportTitle: ZAP Scanning Report
+        template: traditional-pdf
+      type: report
