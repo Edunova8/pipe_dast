@@ -86,5 +86,5 @@ jobs:
         reportDir: ./dast-output-2231075323/dast-output-2204173195
         reportFile: ZAP-Report
         reportTitle: ZAP Scanning Report
-        template: traditional-pdf
+        template: traditional-xml 
       type: report
